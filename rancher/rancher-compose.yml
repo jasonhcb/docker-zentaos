@@ -1,0 +1,5 @@
+nginx:
+  scale: 1
+www:
+  scale: 1
+  

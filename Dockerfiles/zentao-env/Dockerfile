@@ -8,6 +8,7 @@ RUN ln -sf /bin/true /sbin/initctl
 
 # Install packages
 ENV DEBIAN_FRONTEND noninteractive
+
 RUN apt-get update
 RUN apt-get upgrade -y
 
@@ -185,6 +186,8 @@ RUN apt-get remove --purge -y software-properties-common \
 RUN apt-get autoremove -y
 RUN apt-get clean
 RUN apt-get autoclean
+
+COPY nginx-conf/nginx-site.conf /etc/nginx/sites-enabled/default.conf
 
 # Expose Ports
 EXPOSE 443

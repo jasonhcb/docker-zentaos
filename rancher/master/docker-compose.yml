@@ -1,0 +1,30 @@
+version: '2'
+services:
+  zentaos:
+    image: registry.saas.hand-china.com/rdchip/zentaopms
+    ports:
+    - "80:80"
+    - "443:443"
+    tty: true
+    volumes:
+    - /tmp/docker/rdc/www/data:/app/src/public/zentaopms/www/data
+    - /tmp/docker/rdc/tmp/backup:/app/src/public/zentaopms/tmp/backup
+    - /tmp/docker/rdc/tmp/log:/app/src/public/zentaopms/tmp/log
+    - /tmp/docker/rdc/module/hdc/data/:/app/src/public/zentaopms/module/hdc/data
+    - /tmp/docker/rdc/module/bulletin/data/:/app/src/public/zentaopms/module/bulletin/data
+    - /tmp/docker/rdc/config:/app/src/public/zentaopms/config
+  mysql:
+    image: registry.saas.hand-china.com/tools/mysql:5.5
+    ports:
+    - "3306:3306"
+    tty: true
+    environment:
+     MYSQL_ROOT_PASSWORD: my-secret-pw
+    volumes:
+    - /tmp/docker/rdc/mysql/:/var/lib/mysql
+  nginx:
+    image: registry.saas.hand-china.com/tools/nginx:latest
+    ports:
+    - "8080:80"
+    volumes:
+    - /tmp/docker/rdc/nginx/:/etc/nginx/conf.d/

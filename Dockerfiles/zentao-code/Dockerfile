@@ -5,7 +5,7 @@ MAINTAINER <chubo.he@hand-china.com>
 COPY conf/nginx-site.conf /etc/nginx/sites-enabled/default.conf
 
 RUN mkdir /app/src/public/zentaopms
-ADD ./zentaopms /app/src/public/zentaopms
+#ADD ./zentaopms /app/src/public/zentaopms
 RUN curl -O http://files.saas.hand-china.com/hip/rdc/zentaopms.tar 
 RUN tar -zxf zentaopms.tar -C /app/src/public/zentaopms
 RUN rm zentaopms.tar
@@ -16,7 +16,7 @@ RUN rm zentaopms.tar
 #RUN ls -lh /app/src/public/zentaopms/
 #RUN rm /app/src/public/zentaopms/zentaopms.tar 
 # COPY conf/my.php /app/src/public/zentaopms/config/my.php
-RUN chown -R www-data:www-data /app/src/public/zentaopms/tmp/
+RUN mkdir /app/src/public/zentaopms/tmp/log -p && chown -R www-data:www-data /app/src/public/zentaopms/tmp/
 RUN mkdir /app/src/public/zentaopms/module/hdc/data -p
 
 
